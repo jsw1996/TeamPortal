@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Header, Icon, Modal } from 'semantic-ui-react'
+import SignInScreen from '../signin/SignInScreen'
 
 export default function SignInModal() {
     const [open, setOpen] = React.useState(false)
@@ -13,7 +14,8 @@ export default function SignInModal() {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
         >
-            <Header icon='archive' content='Archive Old Messages' />
+            <SignInScreen />
+            {/* <Header icon='archive' content='Archive Old Messages' />
             <Modal.Content>
                 <p>
                     Your inbox is getting full, would you like us to enable automatic
@@ -27,7 +29,7 @@ export default function SignInModal() {
                 <Button color='green' onClick={() => setOpen(false)}>
                     <Icon name='checkmark' /> Yes
         </Button>
-            </Modal.Actions>
+            </Modal.Actions> */}
         </Modal>
     )
 }
