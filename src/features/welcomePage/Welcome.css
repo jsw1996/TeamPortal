@@ -1,0 +1,22 @@
+#welcomeContainer{
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: black;
+}
+
+#welcomeInner{
+    display: flex;
+    justify-content: center;
+
+    width: 600px;
+    height: 100px;
+}
+
+.button{
+    width:200px;
+    margin:auto;
+}
