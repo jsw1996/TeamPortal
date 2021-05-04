@@ -3,9 +3,6 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from '../../firebase/firebase';
 
 import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -16,6 +13,7 @@ import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
+
 // Configure Firebase.
 // const config = {
 //     apiKey: 'AIzaSyAeue-AsYu76MMQlTOM-KlbYBlusW9c1FM',
@@ -97,7 +95,7 @@ export default function SignInScreen() {
   }
 
   return (
-    
+
           <div className={classes.formPaper}>
             <Avatar className={classes.avatar}>
               <LockOutlinedIcon />
@@ -131,8 +129,8 @@ export default function SignInScreen() {
                 onChange={onPassChange}
               />
 
-<div>
-            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+<div> 
+        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} /> 
         </div>
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -161,5 +159,6 @@ export default function SignInScreen() {
               </Grid>
             </form>
           </div>
+
   );
 }
