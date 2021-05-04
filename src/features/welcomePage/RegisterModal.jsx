@@ -8,7 +8,7 @@ export default function RegisterModal() {
         <Modal
             closeIcon
             open={open}
-            trigger={<Button className="button" color="twitter" content='Sign up' icon='signup' size='big' />
+            trigger={<Button className="button" inverted color='pink' content='Sign up' icon='signup' size='big' />
 
             }
             onClose={() => setOpen(false)}
