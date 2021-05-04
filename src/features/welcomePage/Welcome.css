@@ -1,22 +1,24 @@
-#welcomeContainer{
-    display:flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    height: 100%;
-    background: url("../../assets/cool-background.png");
+#welcomeContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  height: 100%;
+  background: url("../../assets/cool-background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-#welcomeInner{
-    display: flex;
-    justify-content: center;
+#welcomeInner {
+  display: flex;
+  justify-content: center;
 
-    width: 600px;
-    height: 100px;
+  width: 600px;
+  height: 100px;
 }
 
-.button{
-    width:180px;
-    margin:auto;
+.button {
+  width: 180px;
+  margin: auto;
 }
