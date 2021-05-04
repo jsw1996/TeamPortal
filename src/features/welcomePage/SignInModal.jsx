@@ -9,7 +9,7 @@ export default function SignInModal() {
         <Modal
             closeIcon
             open={open}
-            trigger={<Button className="button" color="olive" content='Sign in' icon='sign in' size='big' />
+            trigger={<Button className="button" inverted color='violet' content='Sign in' icon='sign in' size='big' />
             }
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}

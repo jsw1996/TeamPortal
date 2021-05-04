@@ -15,6 +15,7 @@ import {
 export default function WelcomePage() {
     return (
         <div id="welcomeContainer" >
+            <h1>Team Portal</h1>
             <div id="welcomeInner">
                 {/* <Button className="button" color="olive" content='Sign in' icon='sign in' size='big' />
                 <Button className="button" color="twitter" content='Sign up' icon='signup' size='big' /> */}
