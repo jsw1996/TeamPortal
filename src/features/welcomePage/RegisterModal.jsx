@@ -55,7 +55,8 @@ function onEmailChange(e){
       trigger={
         <Button
           className="button"
-          color="twitter"
+          inverted 
+          color='pink'
           content="Sign up"
           icon="signup"
           size="big"
