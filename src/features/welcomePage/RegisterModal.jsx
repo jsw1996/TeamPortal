@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, Header, Icon, Modal } from "semantic-ui-react";
+import { Button, Modal } from "semantic-ui-react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useRef, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import {

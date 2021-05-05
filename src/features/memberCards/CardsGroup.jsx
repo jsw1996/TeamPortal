@@ -1,8 +1,7 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CardItem from './CardItem';
 import { Card } from 'semantic-ui-react'
 import { readData } from '../../firebase/firestoreAPI'
-import { ContactsOutlined } from '@material-ui/icons';
 import './card.css'
 export const CardsGroup = () => {
 

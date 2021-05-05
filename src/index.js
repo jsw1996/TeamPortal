@@ -3,15 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Navbar from './features/nav/Navbar'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import WelcomePage from './features/welcomePage/WelcomePage';
-import { CardsGroup } from './features/memberCards/CardsGroup';
+
 
 ReactDOM.render(
   <React.StrictMode>

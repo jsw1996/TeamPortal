@@ -4,13 +4,7 @@ import SignInModal from './SignInModal'
 import RegisterModal from './RegisterModal'
 import 'semantic-ui-css/semantic.min.css'
 import './Welcome.css'
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    NavLink
-} from "react-router-dom";
+
 
 export default function WelcomePage() {
     return (
