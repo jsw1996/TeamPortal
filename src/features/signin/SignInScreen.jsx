@@ -1,15 +1,17 @@
 import React from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "../../firebase/firebase";
-import { useRef, useState } from "react"
-import { useAuth } from "../../contexts/AuthContext"
+import { useRef, useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
+import MuiAlert from "@material-ui/lab/Alert";
+import Snackbar from "@material-ui/core/Snackbar";
 
 import {
     Avatar,
@@ -22,6 +24,9 @@ import {
     Typography,
 } from "@material-ui/core";
 
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const useStyles = makeStyles((theme) => ({
     modal: {
         display: "flex",
@@ -54,14 +59,18 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    root: {
+        width: "100%",
+        marginTop: "20px",
+    },
 }));
 
 // Configure FirebaseUI.
 const uiConfig = {
     // Popup signin flow rather than redirect flow.
-    signInFlow: 'popup',
+    signInFlow: "popup",
     // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-    signInSuccessUrl: '/members',
+    signInSuccessUrl: "/members",
     // We will display Google and Facebook as auth providers.
     signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -72,41 +81,33 @@ const uiConfig = {
 export default function SignInScreen() {
     const classes = useStyles();
 
-
-    const emailRef = useRef()
-    const passwordRef = useRef()
+    const emailRef = useRef();
+    const passwordRef = useRef();
     const [open, setOpen] = React.useState(false);
 
-
-    const { login } = useAuth()
-    const [error, setError] = useState("")
-    const [loading, setLoading] = useState(false)
-    const history = useHistory()
-
+    const { currentUser, login } = useAuth();
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+    const history = useHistory();
+    console.log(currentUser)
     async function handleSubmit(e) {
-        e.preventDefault()
-
-        console.log('aaa')
+        e.preventDefault();
+        console.log("aaa");
         try {
-            setError("")
-            setLoading(true)
-            await login(emailRef.current.value, passwordRef.current.value)
-            history.push("/members")
+            setError("");
+            setLoading(true);
+            await login(emailRef.current.value, passwordRef.current.value);
+            history.push("/members");
         } catch {
-            setError("Failed to log in")
+            setError("Failed to log in");
+            setOpen(true);
         }
-
-        setLoading(false)
+        setLoading(false);
     }
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
 
     const handleClose = () => {
         setOpen(false);
     };
-
 
     return (
         <div className={classes.formPaper}>
@@ -116,7 +117,11 @@ export default function SignInScreen() {
             <Typography component="h1" variant="h5">
                 Sign in
       </Typography>
-            {error && <p >{error}</p>}
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error">
+                    {error}
+                </Alert>
+            </Snackbar>
 
             <form className={classes.form} onSubmit={handleSubmit} noValidate>
                 <TextField

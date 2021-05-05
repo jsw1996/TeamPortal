@@ -20,8 +20,6 @@
   #welcomeInner {
     display: flex;
     justify-content: center;
-  
-    width: 600px;
     height: 100px;
   }
   
@@ -29,4 +27,10 @@
     width: 180px;
     height: 50px;
     margin: auto;
+  }
+
+  body > div.ui.page.modals.dimmer.transition.visible.active > div{
+      left: auto;
+      height: auto;
+      top: auto;
   }

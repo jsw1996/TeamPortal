@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Navbar from './features/nav/Navbar'
+import TopNav from './features/nav/Navbar'
 import WelcomePage from './features/welcomePage/WelcomePage';
 // import Navbar from './features/nav/Navbar'
 import {
@@ -16,9 +16,12 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <Navbar />
         <Route exact path="/" component={WelcomePage}></Route>
-        <Route path="/members" component={CardsGroup}></Route>
+        <Route path={"/(.+)"} render={() => (<><
+          TopNav />
+          <Route path="/members" component={CardsGroup}></Route></>)
+        }></Route>
+
       </AuthProvider>
     </Router>
   );
