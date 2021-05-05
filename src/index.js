@@ -17,7 +17,8 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       {/* <WelcomePage /> */}
-      <CardsGroup />
+      <Route exact path="/" component={WelcomePage}></Route>
+      <Route path="/members" component={CardsGroup}></Route>
     </Router>
 
   </React.StrictMode>,

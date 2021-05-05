@@ -51,7 +51,7 @@ const uiConfig = {
     // Popup signin flow rather than redirect flow.
     signInFlow: 'popup',
     // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-    signInSuccessUrl: '/signedIn',
+    signInSuccessUrl: '/members',
     // We will display Google and Facebook as auth providers.
     signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -63,30 +63,30 @@ const uiConfig = {
 
 
 export default function SignInScreen() {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [email, setEmail] = React.useState(null);
-  const [pass, setPass] = React.useState(null);
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const [email, setEmail] = React.useState(null);
+    const [pass, setPass] = React.useState(null);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+    const handleOpen = () => {
+        setOpen(true);
+    };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+    const handleClose = () => {
+        setOpen(false);
+    };
 
-  function onEmailChange(e) {
-    setEmail(e.target.value);
-  }
+    function onEmailChange(e) {
+        setEmail(e.target.value);
+    }
 
-  function onPassChange(e) {
-    setPass(e.target.value);
-  }
+    function onPassChange(e) {
+        setPass(e.target.value);
+    }
 
-  return (
+    return (
 
-          <div className={classes.formPaper}>
+        <div className={classes.formPaper}>
             <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />
             </Avatar>
@@ -94,46 +94,46 @@ export default function SignInScreen() {
                 Sign in
             </Typography>
             <form className={classes.form} noValidate>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                onChange={onEmailChange}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={onPassChange}
-              />
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                    onChange={onEmailChange}
+                />
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    onChange={onPassChange}
+                />
 
-<div> 
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} /> 
-        </div>
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Sign In
+                <div>
+                    <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+                </div>
+                <FormControlLabel
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
+                />
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                >
+                    Sign In
               </Button>
                 <Grid container>
                     <Grid item xs>
@@ -148,7 +148,7 @@ export default function SignInScreen() {
                     </Grid>
                 </Grid>
             </form>
-          </div>
+        </div>
 
-  );
+    );
 }
