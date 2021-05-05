@@ -1,14 +1,6 @@
 import React, { useState } from "react";
-// import { Menu, Container } from "semantic-ui-react";
-
 import 'semantic-ui-css/semantic.min.css'
 
-import AppBar from '@material-ui/core/AppBar';
-// import Button from '@material-ui/core/Button';
-
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import { useAuth } from "../../contexts/AuthContext"
 import { useHistory } from "react-router";
