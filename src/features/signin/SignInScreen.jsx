@@ -1,7 +1,7 @@
 import React from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "../../firebase/firebase";
-import { useRef, useState} from "react"
+import { useRef, useState } from "react"
 import { useAuth } from "../../contexts/AuthContext"
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -70,34 +70,34 @@ const uiConfig = {
 };
 
 export default function SignInScreen() {
-  const classes = useStyles();
+    const classes = useStyles();
 
 
-  const emailRef = useRef()
-  const passwordRef = useRef()
-  const [open, setOpen] = React.useState(false);
+    const emailRef = useRef()
+    const passwordRef = useRef()
+    const [open, setOpen] = React.useState(false);
 
 
-  const { login } = useAuth()
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
-  const history = useHistory()
+    const { login } = useAuth()
+    const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
+    const history = useHistory()
 
-  async function handleSubmit(e) {
-    e.preventDefault()
- 
-    console.log('aaa')
-    try {
-      setError("")
-      setLoading(true)
-      await login(emailRef.current.value, passwordRef.current.value)
-      history.push("/")
-    } catch {
-      setError("Failed to log in")
+    async function handleSubmit(e) {
+        e.preventDefault()
+
+        console.log('aaa')
+        try {
+            setError("")
+            setLoading(true)
+            await login(emailRef.current.value, passwordRef.current.value)
+            history.push("/members")
+        } catch {
+            setError("Failed to log in")
+        }
+
+        setLoading(false)
     }
-  
-    setLoading(false)
-  }
 
     const handleOpen = () => {
         setOpen(true);
@@ -116,52 +116,52 @@ export default function SignInScreen() {
             <Typography component="h1" variant="h5">
                 Sign in
       </Typography>
-      {error && <p >{error}</p>}
+            {error && <p >{error}</p>}
 
-      <form className={classes.form} onSubmit={handleSubmit} noValidate>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          autoComplete="email"
-          autoFocus
-          inputRef={emailRef}
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          // name="password"
-          label="Password"
-          type="password"
-          // id="password"
-          autoComplete="current-password"
-          inputRef={passwordRef}
-        />
+            <form className={classes.form} onSubmit={handleSubmit} noValidate>
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                    inputRef={emailRef}
+                />
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    // name="password"
+                    label="Password"
+                    type="password"
+                    // id="password"
+                    autoComplete="current-password"
+                    inputRef={passwordRef}
+                />
 
-        <div>
-          <StyledFirebaseAuth
-            uiConfig={uiConfig}
-            firebaseAuth={firebase.auth()}
-          />
-        </div>
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="Remember me"
-        />
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          type="submit"
-        >
-          Sign In
+                <div>
+                    <StyledFirebaseAuth
+                        uiConfig={uiConfig}
+                        firebaseAuth={firebase.auth()}
+                    />
+                </div>
+                <FormControlLabel
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
+                />
+                <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                    type="submit"
+                >
+                    Sign In
         </Button>
                 <Grid container>
                     <Grid item xs>

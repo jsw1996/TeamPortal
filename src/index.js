@@ -12,10 +12,19 @@ import {
 } from "react-router-dom";
 import WelcomePage from './features/welcomePage/WelcomePage';
 import { CardsGroup } from './features/memberCards/CardsGroup';
+import { AuthProvider } from './contexts/AuthContext'
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+
+      <AuthProvider>
+        <Route exact path="/" component={WelcomePage}></Route>
+        <App />
+      </AuthProvider>
+    </Router>
+
   </React.StrictMode>,
   document.getElementById('root')
 );

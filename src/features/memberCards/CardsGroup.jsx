@@ -4,6 +4,8 @@ import { Card } from 'semantic-ui-react'
 import { readData } from '../../firebase/firestoreAPI'
 import { ContactsOutlined } from '@material-ui/icons';
 import './card.css'
+import { Grid } from 'semantic-ui-react'
+
 export const CardsGroup = () => {
 
     let [members, setMembers] = useState([]);
@@ -19,12 +21,17 @@ export const CardsGroup = () => {
         })
     }, [])
 
-    return (<Card.Group id="cardsGroup" itemsPerRow={5}>
-        {members.map(
-            (item) => (<CardItem image='https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg' header={item} meta={"hahahah"} des={'djjdlajfl'}></CardItem>)
+    return (
+        //<Card.Group id="cardsGroup" >
+        <Grid id="cardsGroup">
 
-        )}
-    </Card.Group>
+            {members.map(
+                (item) => (<Grid.Column mobile={8} tablet={8} computer={3}>
+                    <CardItem image='https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg' header={item} meta={"hahahah"} des={'djjdlajfl'}></CardItem>                </Grid.Column>
+                )
+            )}
+        </Grid>
+        // </Card.Group>
     )
 }
 
