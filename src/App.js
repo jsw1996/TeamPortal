@@ -9,13 +9,16 @@ import {
   Link
 } from "react-router-dom";
 
-import {AuthProvider} from './contexts/AuthContext'
+import { AuthProvider } from './contexts/AuthContext'
+import { CardsGroup } from './features/memberCards/CardsGroup'
 function App() {
   return (
-    // <Router>
-    <AuthProvider>      <WelcomePage />
-</AuthProvider>
-    // </Router>
+    <Router>
+      <AuthProvider>
+        <Route exact path="/" component={WelcomePage}></Route>
+        <Route path="/members" component={CardsGroup}></Route>
+      </AuthProvider>
+    </Router>
   );
 }
 
