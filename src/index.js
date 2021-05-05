@@ -11,12 +11,13 @@ import {
   Link
 } from "react-router-dom";
 import WelcomePage from './features/welcomePage/WelcomePage';
-
+import { CardsGroup } from './features/memberCards/CardsGroup';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <WelcomePage />
+      {/* <WelcomePage /> */}
+      <CardsGroup />
     </Router>
 
   </React.StrictMode>,
