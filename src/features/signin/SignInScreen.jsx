@@ -1,12 +1,15 @@
 import React from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "../../firebase/firebase";
+import { useRef, useState} from "react"
+import { useAuth } from "../../contexts/AuthContext"
 
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { useHistory } from "react-router-dom"
 
 import {
   Avatar,
@@ -68,9 +71,33 @@ const uiConfig = {
 
 export default function SignInScreen() {
   const classes = useStyles();
+
+
+  const emailRef = useRef()
+  const passwordRef = useRef()
   const [open, setOpen] = React.useState(false);
-  const [email, setEmail] = React.useState(null);
-  const [pass, setPass] = React.useState(null);
+
+
+  const { login } = useAuth()
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
+  const history = useHistory()
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+ 
+    console.log('aaa')
+    try {
+      setError("")
+      setLoading(true)
+      await login(emailRef.current.value, passwordRef.current.value)
+      history.push("/")
+    } catch {
+      setError("Failed to log in")
+    }
+  
+    setLoading(false)
+  }
 
   const handleOpen = () => {
     setOpen(true);
@@ -80,14 +107,6 @@ export default function SignInScreen() {
     setOpen(false);
   };
 
-  function onEmailChange(e) {
-    console.log(11111);
-    setEmail(e.target.value);
-  }
-
-  function onPassChange(e) {
-    setPass(e.target.value);
-  }
 
   return (
     <div className={classes.formPaper}>
@@ -97,7 +116,9 @@ export default function SignInScreen() {
       <Typography component="h1" variant="h5">
         Sign in
       </Typography>
-      <form className={classes.form} noValidate>
+      {error && <p >{error}</p>}
+
+      <form className={classes.form} onSubmit={handleSubmit} noValidate>
         <TextField
           variant="outlined"
           margin="normal"
@@ -108,19 +129,19 @@ export default function SignInScreen() {
           name="email"
           autoComplete="email"
           autoFocus
-          onChange={onEmailChange}
+          inputRef={emailRef}
         />
         <TextField
           variant="outlined"
           margin="normal"
           required
           fullWidth
-          name="password"
+          // name="password"
           label="Password"
           type="password"
-          id="password"
+          // id="password"
           autoComplete="current-password"
-          onChange={onPassChange}
+          inputRef={passwordRef}
         />
 
         <div>
@@ -138,7 +159,7 @@ export default function SignInScreen() {
           variant="contained"
           color="primary"
           className={classes.submit}
-          // type="submit"
+          type="submit"
         >
           Sign In
         </Button>
