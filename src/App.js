@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Navbar from './features/nav/Navbar'
+import TopNav from './features/nav/Navbar'
 import WelcomePage from './features/welcomePage/WelcomePage';
 import {
   BrowserRouter as Router,
@@ -15,7 +15,7 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <Navbar/>
+        <TopNav/>
         <Route exact path="/" component={WelcomePage}></Route>
         <Route path="/members" component={CardsGroup}></Route>
       </AuthProvider>
