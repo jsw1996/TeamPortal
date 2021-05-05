@@ -17,13 +17,8 @@ import { AuthProvider } from './contexts/AuthContext'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
 
-      <AuthProvider>
-        <Route exact path="/" component={WelcomePage}></Route>
-        <App />
-      </AuthProvider>
-    </Router>
+    <App />
 
   </React.StrictMode>,
   document.getElementById('root')

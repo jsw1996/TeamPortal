@@ -14,11 +14,13 @@ import { AuthProvider } from './contexts/AuthContext'
 import { CardsGroup } from './features/memberCards/CardsGroup'
 function App() {
   return (
-    <>
-      <Navbar />
-
-      <Route path="/members" component={CardsGroup}></Route>
-    </>
+    <Router>
+      <AuthProvider>
+        <Navbar />
+        <Route exact path="/" component={WelcomePage}></Route>
+        <Route path="/members" component={CardsGroup}></Route>
+      </AuthProvider>
+    </Router>
   );
 }
 
