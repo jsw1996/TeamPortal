@@ -15,10 +15,8 @@ import WelcomePage from './features/welcomePage/WelcomePage';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <WelcomePage />
-    </Router>
-
+    
+  <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );

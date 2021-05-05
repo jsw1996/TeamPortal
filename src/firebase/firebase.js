@@ -6,9 +6,9 @@ import firebase from "firebase/app";
 
 // If you enabled Analytics in your project, add the Firebase SDK for Analytics
 import "firebase/analytics";
+import "firebase/auth"
 
 // Add the Firebase products that you want to use
-import "firebase/auth";
 import "firebase/firestore";
 
 
@@ -21,9 +21,8 @@ const firebaseConfig = {
     appId: "1:467926069948:web:3e00bb687a97dc5e1c56b9",
     measurementId: "G-YRV08RKZ76"
 };
-
-
-firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 export default firebase;
+export const auth = app.auth()
 
 export var db = firebase.firestore();

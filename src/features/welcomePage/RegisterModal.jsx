@@ -1,5 +1,8 @@
 import React from "react";
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
+import { useAuth } from "../../contexts/AuthContext"
+import { useRef, useState} from "react"
+import { Link, useHistory } from "react-router-dom"
 
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import {
@@ -8,7 +11,7 @@ import {
   TextField,
   FormControlLabel,
   Checkbox,
-  Link,
+  // Link,
   Grid,
   Typography,
 } from "@material-ui/core";
@@ -37,17 +40,40 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RegisterModal() {
   const classes = useStyles();
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const passwordConfirmRef = useRef()
 
   const [open, setOpen]  = React.useState(false);
-  const [lastName, setLastName] = React.useState(null);
-  const [firstName, setFirstName] = React.useState(null);
-  const [email, setEmail] = React.useState(null);
-  const [pass, setPass] = React.useState(null);
+  // const [lastName, setLastName] = React.useState(null);
+  // const [firstName, setFirstName] = React.useState(null);
+  // const [email, setEmail] = React.useState(null);
+  // const [pass, setPass] = React.useState(null);
+  console.log(useAuth())
+  const { signup } = useAuth()
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
+  const history = useHistory()
 
-function onEmailChange(e){
-  console.log(e.target.value)
+
+async function handleSubmit(e) {
+  e.preventDefault()
+  console.log(passwordRef.current.value,passwordConfirmRef.current.value)
+  if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+    return setError("Passwords do not match")
+  }
+
+  try {
+    setError("")
+    setLoading(true)
+    await signup(emailRef.current.value, passwordRef.current.value)
+    history.push("/")
+  } catch {
+    setError("Failed to create an account")
+  }
+
+  setLoading(false)
 }
-
   return (
     <Modal
       closeIcon
@@ -72,7 +98,8 @@ function onEmailChange(e){
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        {error && <p>{error}</p>}
+        <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -91,9 +118,9 @@ function onEmailChange(e){
                 variant="outlined"
                 required
                 fullWidth
-                id="lastName"
+                // id="lastName"
                 label="Last Name"
-                name="lastName"
+                // name="lastName"
                 autoComplete="lname"
               />
             </Grid>
@@ -102,11 +129,12 @@ function onEmailChange(e){
                 variant="outlined"
                 required
                 fullWidth
-                id="email"
+                // id="email"
                 label="Email Address"
-                name="email"
+                // name="email"
                 autoComplete="email"
-                onChange={onEmailChange}
+                inputRef = {emailRef}
+                // onChange={onEmailChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -114,10 +142,24 @@ function onEmailChange(e){
                 variant="outlined"
                 required
                 fullWidth
-                name="password"
+                // name="password"
                 label="Password"
                 type="password"
-                id="password"
+                // id="password"
+                inputRef= {passwordRef}
+                autoComplete="current-password"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                // name="password"
+                label="Password Confirm"
+                type="password"
+                // id="password"
+                inputRef = {passwordConfirmRef}
                 autoComplete="current-password"
               />
             </Grid>
@@ -134,14 +176,15 @@ function onEmailChange(e){
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled = {loading}
           >
             Sign Up
           </ButtonM>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              {/* <Link href="#" variant="body2">
                 Already have an account? Sign in
-              </Link>
+              </Link> */}
             </Grid>
           </Grid>
         </form>
