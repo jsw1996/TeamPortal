@@ -15,6 +15,7 @@ function App() {
   return (
     <Router>
       <AuthProvider>
+        <Navbar/>
         <Route exact path="/" component={WelcomePage}></Route>
         <Route path="/members" component={CardsGroup}></Route>
       </AuthProvider>
