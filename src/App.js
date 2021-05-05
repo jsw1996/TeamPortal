@@ -2,6 +2,10 @@ import logo from './logo.svg';
 import './App.css';
 import TopNav from './features/nav/Navbar'
 import WelcomePage from './features/welcomePage/WelcomePage';
+import PrivateRouteWelcome from "./features/privateRoute/PrivateRouteWelcome"
+import PrivateRouteMembers from "./features/privateRoute/PrivateRouteMembers"
+
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,8 +20,8 @@ function App() {
     <Router>
       <AuthProvider>
         <TopNav/>
-        <Route exact path="/" component={WelcomePage}></Route>
-        <Route path="/members" component={CardsGroup}></Route>
+        <PrivateRouteWelcome exact  path="/" component={WelcomePage}></PrivateRouteWelcome>
+        <PrivateRouteMembers path="/members" component={CardsGroup}></PrivateRouteMembers>
       </AuthProvider>
     </Router>
   );
