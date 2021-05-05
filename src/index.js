@@ -15,12 +15,7 @@ import { CardsGroup } from './features/memberCards/CardsGroup';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      {/* <WelcomePage /> */}
-      <Route exact path="/" component={WelcomePage}></Route>
-      <Route path="/members" component={CardsGroup}></Route>
-    </Router>
-
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
