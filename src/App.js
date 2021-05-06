@@ -4,7 +4,7 @@ import TopNav from './features/nav/Navbar'
 import WelcomePage from './features/welcomePage/WelcomePage';
 import PrivateRouteWelcome from "./features/privateRoute/PrivateRouteWelcome"
 import PrivateRouteMembers from "./features/privateRoute/PrivateRouteMembers"
-
+import { CreateProfile } from "./features/createProfile/CreateProfile"
 
 import {
   BrowserRouter as Router,
@@ -22,7 +22,11 @@ function App() {
         <PrivateRouteWelcome exact path="/" component={WelcomePage}></PrivateRouteWelcome>
         <Route path={"/(.+)"} render={() => (<>
           <TopNav />
-          <PrivateRouteMembers path="/members" component={CardsGroup}></PrivateRouteMembers></>
+          <PrivateRouteMembers path="/members" component={CardsGroup}></PrivateRouteMembers>
+          <PrivateRouteMembers path="/createprofile" component={CreateProfile}></PrivateRouteMembers>
+
+        </>
+
         )}></Route>
 
 

@@ -9,6 +9,11 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button'
+import {
+
+    Link
+} from "react-router-dom";
+
 const useStyles = makeStyles((theme) => ({
     '@global': {
         ul: {
@@ -83,8 +88,8 @@ const TopNav = () => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="#features">Mmebers</Nav.Link>
-                    <Nav.Link href="#pricing">Crate Profile</Nav.Link>
+                    <Nav.Link as={Link} to='/members'>Mmebers</Nav.Link>
+                    <Nav.Link as={Link} to="/createprofile">Crate Profile</Nav.Link>
                 </Nav>
                 <Nav>
                     {/* <Nav.Link eventKey={2} href="#memes"> */}
