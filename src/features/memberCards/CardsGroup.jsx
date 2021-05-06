@@ -4,8 +4,13 @@ import { Card } from 'semantic-ui-react'
 import { readData } from '../../firebase/firestoreAPI'
 import './card.css'
 import { Grid } from 'semantic-ui-react'
+import { useAuth } from "../../contexts/AuthContext";
+import TopNav from '../nav/Navbar'
+
 
 export const CardsGroup = () => {
+    const { currentUser,signup } = useAuth();
+    console.log(currentUser)
 
     let [members, setMembers] = useState([]);
 
@@ -22,14 +27,17 @@ export const CardsGroup = () => {
 
     return (
         //<Card.Group id="cardsGroup" >
-        <Grid id="cardsGroup">
+        <div>
+          <p>welcome {currentUser.displayName}</p>
+          <Grid id="cardsGroup">
 
             {members.map(
-                (item) => (<Grid.Column mobile={8} tablet={8} computer={3}>
+                (item, index) => (<Grid.Column key = {index} mobile={8} tablet={8} computer={3}>
                     <CardItem image='https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg' header={item} meta={"hahahah"} des={'djjdlajfl'}></CardItem>                </Grid.Column>
                 )
             )}
-        </Grid>
+        </Grid></div>
+        
         // </Card.Group>
     )
 }
