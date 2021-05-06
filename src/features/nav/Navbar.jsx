@@ -49,40 +49,19 @@ const TopNav = () => {
     const { currentUser, logout } = useAuth()
     const history = useHistory()
 
-    async function handleLogout() {
+    async function handleLogout(e) {
         setError("")
+        // e.preventDefault();
 
         try {
             await logout()
-            history.push("/")
+            // history.push("/")
         } catch {
             console.log("Failed to log out")
             setError("Failed to log out")
         }
     }
     return (
-        // <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
-        //   <Toolbar className={classes.toolbar}>
-        //     <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-        //       Team Portal
-        //     </Typography>
-        //     {error && <p >{error}</p>}
-        //     <nav>
-        //       <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-        //         Features
-        //       </Link>
-        //       <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-        //         Enterprise
-        //       </Link>
-        //       <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-        //         Support
-        //       </Link>
-        //     </nav>
-        //     <Button onClick = {handleLogout} href="#" color="primary" variant="outlined" className={classes.link}>
-        //       Log Out
-        //     </Button>
-        //   </Toolbar>
-        // </AppBar>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Navbar.Brand href="#home">Team Portal</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />

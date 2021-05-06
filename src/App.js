@@ -6,15 +6,8 @@ import PrivateRouteWelcome from "./features/privateRoute/PrivateRouteWelcome"
 import PrivateRouteMembers from "./features/privateRoute/PrivateRouteMembers"
 import { CreateProfile } from "./features/createProfile/CreateProfile"
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-
-import { AuthProvider } from './contexts/AuthContext'
-import { CardsGroup } from './features/memberCards/CardsGroup'
+import { AuthProvider } from "./contexts/AuthContext";
+import { CardsGroup } from "./features/memberCards/CardsGroup";
 function App() {
   return (
     <Router>

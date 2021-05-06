@@ -53,46 +53,52 @@ export default function RegisterModal() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-
-  const [firstName, setFirstName] = useState(null)
-  const [lastName, setLastName] = useState(null)
+  const firstNameRef =  useRef();
+  const lastNameRef = useRef()
 
   const [open, setOpen] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
 
-  // const [lastName, setLastName] = React.useState(null);
-  // const [firstName, setFirstName] = React.useState(null);
-  // const [email, setEmail] = React.useState(null);
-  // const [pass, setPass] = React.useState(null);
-  const { signup } = useAuth();
+  const { currentUser,signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(passwordRef.current.value, passwordConfirmRef.current.value);
+
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       setError("Passwords do not match");
       return setOpenAlert(true);
     }
 
-    try {
+    console.log(passwordRef.current.value, passwordConfirmRef.current.value);
+    if (!(firstNameRef.current.value && lastNameRef.current.value)) {
+      setError("Name can not be empty");
+      return setOpenAlert(true);
+    }
+
+    // try {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value).then((userCredential) => {
         // Signed in 
         var user = userCredential.user;
         user.updateProfile({
-          displayName: `${firstName} ${lastName}`
+          displayName: `${firstNameRef.current.value} ${lastNameRef.current.value}`
         })
+        // .then(()=>{ history.push("/members");})
+      }).catch((error) => {
+        var errorMessage = error.message;
+        setError(errorMessage);
+        setOpenAlert(true);
       });
-      history.push("/members");
-    } catch {
-      setError("Failed to create an account");
-      setOpenAlert(true);
 
-    }
+    // } catch {
+    //   setError("Failed to create an account");
+    //   setOpenAlert(true);
+
+    // }
 
     setLoading(false);
   }
@@ -101,13 +107,6 @@ export default function RegisterModal() {
     setOpenAlert(false);
   };
 
-  const onFirstNameChange = (e) =>{
-    setFirstName(e.target.value);
-  }
-
-  const onLastNameChange = (e) =>{
-    setLastName(e.target.value);
-  }
   return (
     <Modal
       closeIcon
@@ -133,6 +132,7 @@ export default function RegisterModal() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
+        <p>{JSON.stringify(currentUser)}</p>
         <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error">
         {error}
@@ -150,7 +150,8 @@ export default function RegisterModal() {
                 fullWidth
                 label="First Name"
                 autoFocus
-                onChange = {onFirstNameChange}
+                inputRef={firstNameRef}
+
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -162,7 +163,8 @@ export default function RegisterModal() {
                 label="Last Name"
                 // name="lastName"
                 autoComplete="lname"
-                onChange = {onLastNameChange}
+                inputRef={lastNameRef}
+
 
               />
             </Grid>
