@@ -3,6 +3,7 @@ import { Button, Modal } from "semantic-ui-react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { db } from "../../firebase/firebase.js";
 
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import {
@@ -53,13 +54,13 @@ export default function RegisterModal() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const firstNameRef =  useRef();
-  const lastNameRef = useRef()
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
 
   const [open, setOpen] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
 
-  const { currentUser,signup } = useAuth();
+  const { currentUser, signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -79,16 +80,31 @@ export default function RegisterModal() {
     }
 
     // try {
-      setError("");
-      setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value).then((userCredential) => {
-        // Signed in 
+    setError("");
+    setLoading(true);
+    await signup(emailRef.current.value, passwordRef.current.value)
+      .then((userCredential) => {
+        // Signed in
         var user = userCredential.user;
         user.updateProfile({
-          displayName: `${firstNameRef.current.value} ${lastNameRef.current.value}`
-        })
+          displayName: `${firstNameRef.current.value} ${lastNameRef.current.value}`,
+        });
+        // Add a new document in collection "cities"
+        db.collection("users")
+          .doc(userCredential.user.uid)
+          .set({
+            name: `${firstNameRef.current.value} ${lastNameRef.current.value}`,
+          })
+          .then(() => {
+            console.log("Document successfully written!");
+          })
+          .catch((error) => {
+            console.error("Error writing document: ", error);
+          });
+
         // .then(()=>{ history.push("/members");})
-      }).catch((error) => {
+      })
+      .catch((error) => {
         var errorMessage = error.message;
         setError(errorMessage);
         setOpenAlert(true);
@@ -121,11 +137,13 @@ export default function RegisterModal() {
           size="big"
         />
       }
-      onClose={() => {setOpen(false);setOpenAlert(false)}}
+      onClose={() => {
+        setOpen(false);
+        setOpenAlert(false);
+      }}
       onOpen={() => setOpen(true)}
     >
       <div className={classes.paper}>
-      
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -133,11 +151,15 @@ export default function RegisterModal() {
           Sign up
         </Typography>
         <p>{JSON.stringify(currentUser)}</p>
-        <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error">
-        {error}
-        </Alert>
-      </Snackbar>
+        <Snackbar
+          open={openAlert}
+          autoHideDuration={6000}
+          onClose={handleClose}
+        >
+          <Alert onClose={handleClose} severity="error">
+            {error}
+          </Alert>
+        </Snackbar>
         {error && <p>{error}</p>}
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -151,7 +173,6 @@ export default function RegisterModal() {
                 label="First Name"
                 autoFocus
                 inputRef={firstNameRef}
-
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -164,8 +185,6 @@ export default function RegisterModal() {
                 // name="lastName"
                 autoComplete="lname"
                 inputRef={lastNameRef}
-
-
               />
             </Grid>
             <Grid item xs={12}>
