@@ -1,5 +1,60 @@
-#createProfileForm{
-    width:80%;
-    margin: auto;
-    margin-top: 30px;
+/* #createProfileForm {
+  /* margin-top: 30px; */
+
+
+  #createProfileForm .segment{
+  border-radius: 20px;
 }
+
+
+h3{
+  color: #FE3730;
+}
+
+.file {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+
+.file-input label {
+  position: relative;
+  display: block;
+  text-align: center; 
+  background-image: url("https://www.clipartmax.com/png/full/257-2572603_user-man-social-avatar-profile-icon-man-avatar-in-circle.png");
+   background-size: cover; 
+   background-position: center; 
+   height: 100px; 
+   width: 100px; 
+   border-radius: 50%; 
+   margin: auto
+}
+
+
+#overlay{
+  opacity: 0%;
+  border-radius: 50%;
+  position:absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(24, 24, 24, 0.377);
+  text-align: center;
+  color: white;
+  padding-top: 40px;
+}
+
+#overlay:hover{
+  opacity: 100%;
+  cursor: pointer;
+
+}
+
+/* #overlay:hover::after{
+  content: "lalalla";
+
+} */
