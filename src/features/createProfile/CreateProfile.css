@@ -3,7 +3,7 @@
 
 
   #createProfileForm .segment{
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 
@@ -53,6 +53,8 @@ h3{
   cursor: pointer;
 
 }
+
+
 
 /* #overlay:hover::after{
   content: "lalalla";

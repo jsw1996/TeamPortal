@@ -8,8 +8,9 @@ const extra = (
     </a>
 )
 
-const CardItem = ({ image, header, meta, des, toPath, as }) => (
+const CardItem = ({ onClick, image, header, meta, des, toPath, as }) => (
     <Card
+        onClick={onClick}
         image={image}
         header={header}
         meta={meta}

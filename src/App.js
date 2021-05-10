@@ -9,6 +9,8 @@ import { CreateProfile } from "./features/createProfile/CreateProfile";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CardsGroup } from "./features/memberCards/CardsGroup";
 import Container from "@material-ui/core/Container";
+import { Provider } from 'react-redux'
+import store from './redux/store'
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 function App() {
@@ -25,14 +27,20 @@ function App() {
           render={() => (
             <>
               <TopNav />
-              <PrivateRouteMembers
-                path="/members"
-                component={CardsGroup}
-              ></PrivateRouteMembers>
-              <PrivateRouteMembers
-                path="/createprofile"
-                component={CreateProfile}
-              ></PrivateRouteMembers>
+              <Provider store={store}>
+                <PrivateRouteMembers exact
+                  path="/members"
+                  component={CardsGroup}
+                ></PrivateRouteMembers>
+                <PrivateRouteMembers
+                  path="/createprofile"
+                  component={CreateProfile}
+                ></PrivateRouteMembers>
+                <Route
+                  path="/members/:id"
+                >
+                  <CreateProfile changable={true} />
+                </Route></Provider>
             </>
           )}
         ></Route>

@@ -6,19 +6,28 @@ import { addMember } from '../../firebase/firestoreAPI'
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import { Icon } from 'semantic-ui-react'
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
 
-export const CreateProfile = () => {
+export const CreateProfile = ({ changable }) => {
   let [profileImage, setProfileImage] = useState("https://www.clipartmax.com/png/full/257-2572603_user-man-social-avatar-profile-icon-man-avatar-in-circle.png")
+  let [readOnly, setReadOnly] = useState(!changable);
+  let { id } = useParams();
+  let [profile, setProfile] = useState(useSelector(state => state))
+  console.log("profile:" + profile);
 
-  let profile = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    position: "",
-    leader: "",
-    team: "",
-    profileImage: ""
-  }
+
+  // let profile = {
+  //   firstName: "",
+  //   lastName: "",
+  //   email: "",
+  //   position: "",
+  //   leader: "",
+  //   team: "",
+  //   profileImage: "",
+  //   tel: "",
+  //   des: ""
+  // }
 
   let loadFile = function (event) {
     if (event.target.value !== "") {
@@ -35,7 +44,8 @@ export const CreateProfile = () => {
   }
 
   let handleChange = (event, { name, value }) => {
-    Object.assign(profile, { [name]: value })
+    // Object.assign(profile, { [name]: value })
+    setProfile(Object.assign({}, profile, { [name]: value }));
   }
 
 
@@ -53,9 +63,9 @@ export const CreateProfile = () => {
         }}
       >
         <Form id="createProfileForm" onSubmit={handleSubmit}>
-          <div class="file-input" style={{ marginBottom: "30px" }}>
+          <div className="file-input" style={{ marginBottom: "30px" }}>
             <input accept="image/*" onChange={loadFile} type="file" id="file" class="file" />
-            <label for="file" style={{ backgroundImage: `url(${profileImage})` }}><div id="overlay"><Icon size="large" name='upload' /></div>
+            <label style={{ backgroundImage: `url(${profileImage})` }}><div id="overlay"><Icon size="large" name='upload' /></div>
             </label>
           </div>
           <Grid stackable columns={2}>
@@ -66,6 +76,8 @@ export const CreateProfile = () => {
 
                 <Form.Group>
                   <Form.Input
+                    value={profile.firstName}
+                    readOnly={readOnly}
                     label="First Name"
                     name="firstName"
                     width={8}
@@ -74,7 +86,9 @@ export const CreateProfile = () => {
 
                   />
                   <Form.Input
-                    disabled
+                    value={profile.lastName}
+                    id="lastName"
+                    readOnly={readOnly}
                     label="Last Name"
                     name="lastName"
                     width={8}
@@ -83,32 +97,23 @@ export const CreateProfile = () => {
                   />
                 </Form.Group>
                 <br />
-                <Form.Input label="Email" name="email" placeholder="Email" type="email" onChange={handleChange} />
-                <Form.Input label="Phone Number" name="tel" placeholder="Phone Number" type="tel" onChange={handleChange} />
+                <Form.Input value={profile.email} readOnly={readOnly} label="Email" name="email" placeholder="Email" type="email" onChange={handleChange} />
+                <Form.Input value={profile.tel} readOnly={readOnly} label="Phone Number" name="tel" placeholder="Phone Number" type="tel" onChange={handleChange} />
 
-                {/* <Form.Input
-                  label="Profile Image"
-                  accept="image/*"
-                  type="file"
-                  onChange={loadFile}
-                /> */}
-                {/* <div style={{ textAlign: "center", backgroundImage: `url(${profileImage})`, backgroundSize: "cover", backgroundPosition: "center", height: "100px", width: "100px", borderRadius: "50%", margin: "auto" }}>
-
-                </div> */}
               </Segment>
               <Segment className="segment">
                 <h3>Team Role</h3>
-                <Form.Input label="Team" placeholder="Team" name="team" onChange={handleChange}
+                <Form.Input value={profile.team} readOnly={readOnly} label="Team" placeholder="Team" name="team" onChange={handleChange}
                 />
 
-                <Form.Input label="Position" placeholder="Position" name="position" onChange={handleChange} />
-                <Form.Input label="Leader " placeholder="Leader" name="leader" onChange={handleChange}
+                <Form.Input value={profile.position} readOnly={readOnly} label="Position" placeholder="Position" name="position" onChange={handleChange} />
+                <Form.Input value={profile.leader} readOnly={readOnly} label="Leader " placeholder="Leader" name="leader" onChange={handleChange}
                 />
               </Segment>
             </Grid.Column>
             <Grid.Column width={10}>
               <Segment className="segment">
-                <Form.TextArea label="Self Description" name="description" onChange={handleChange} />
+                <Form.TextArea value={profile.des} readOnly={readOnly} label="Self Description" name="des" onChange={handleChange} />
 
               </Segment>
             </Grid.Column>
