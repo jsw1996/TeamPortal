@@ -1,0 +1,30 @@
+.navLink{
+    font-weight: bold;
+    text-decoration: none;
+    color: rgb(189, 189, 189);
+    margin-right: 10px;
+}
+
+.navLink:hover{
+    text-decoration: none;
+    color: white;
+}
+
+.navLink.active{
+    color: coral;
+}
+
+#title{
+    color:rgb(255, 255, 255);
+    font-size: x-large;
+
+    font-weight:900;
+}
+
+#myNav{
+    background-color: #8A4FFF !important;
+}
+
+#logOutButton{
+    
+}

@@ -8,26 +8,17 @@ import Paper from "@material-ui/core/Paper";
 import { Icon } from 'semantic-ui-react'
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from "react-router-dom";
 
-export const CreateProfile = ({ changable }) => {
+export const CreateProfile = ({ changable, newProfile }) => {
   let [profileImage, setProfileImage] = useState("https://www.clipartmax.com/png/full/257-2572603_user-man-social-avatar-profile-icon-man-avatar-in-circle.png")
   let [readOnly, setReadOnly] = useState(!changable);
   let { id } = useParams();
-  let [profile, setProfile] = useState(useSelector(state => state))
+  const initialProfile = useSelector(state => state);
+  let [profile, setProfile] = useState(initialProfile)
   console.log("profile:" + profile);
 
 
-  // let profile = {
-  //   firstName: "",
-  //   lastName: "",
-  //   email: "",
-  //   position: "",
-  //   leader: "",
-  //   team: "",
-  //   profileImage: "",
-  //   tel: "",
-  //   des: ""
-  // }
 
   let loadFile = function (event) {
     if (event.target.value !== "") {
@@ -43,19 +34,25 @@ export const CreateProfile = ({ changable }) => {
     addMember(profile);
   }
 
+
+
   let handleChange = (event, { name, value }) => {
-    // Object.assign(profile, { [name]: value })
     setProfile(Object.assign({}, profile, { [name]: value }));
   }
 
+  let handleEdit = (event) => {
+    setReadOnly(false);
+  }
+
+  let handleReset = () => {
+    setReadOnly(true);
+    setProfile(initialProfile)
+  }
+
+
 
   return (
-    <Paper
-      style={{
-        backgroundImage: "linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%)",
-        paddingTop: "30px",
-      }}
-    >
+    <Paper id="paper">
       <Container
         maxWidth="lg"
         style={{
@@ -64,10 +61,12 @@ export const CreateProfile = ({ changable }) => {
       >
         <Form id="createProfileForm" onSubmit={handleSubmit}>
           <div className="file-input" style={{ marginBottom: "30px" }}>
-            <input accept="image/*" onChange={loadFile} type="file" id="file" class="file" />
-            <label style={{ backgroundImage: `url(${profileImage})` }}><div id="overlay"><Icon size="large" name='upload' /></div>
+            <input accept="image/*" onChange={loadFile} type="file" id="file" className="file" name="file" />
+            <label for="file" style={{ backgroundImage: `url(${profileImage})` }}>
+              <div id="overlay"><Icon size="large" name='upload' /></div>
             </label>
           </div>
+          <h2 style={{ textAlign: "center", marginBottom: "30px" }}>{profile.firstName + " " + profile.lastName}</h2>
           <Grid stackable columns={2}>
             <Grid.Column width={6}>
               <Segment className="segment">
@@ -118,9 +117,16 @@ export const CreateProfile = ({ changable }) => {
               </Segment>
             </Grid.Column>
           </Grid>
-          <Button type="submit" color="green" compact={true} content={"Submit"} circular floated={"right"} style={{ width: "110px" }}></Button>
+          {newProfile ?
+            <div>
+
+              {!readOnly ? (<div style={{ overflow: "hidden" }}>
+                <Button type="submit" color="green" size="big" content={"Submit"} floated={"right"} style={{ width: "110px" }}></Button>
+                <Button onClick={handleReset} type="reset" color="red" size="big" floated={"right"} style={{ width: "110px" }}>Cancel</Button></div>) :
+                <Button onClick={handleEdit} color="linkedin" floated={"right"} size="big" style={{ width: "110px" }}>Edit</Button>}
+            </div> : <div style={{ overflow: "hidden" }}><Button as={Link} to="/members" color="twitter" size="big" floated={"right"} style={{ width: "110px" }}>Back</Button></div>}
         </Form>
       </Container>
     </Paper>
   );
-};
+}

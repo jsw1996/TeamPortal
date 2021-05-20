@@ -4,8 +4,28 @@ const rootReducer = (state = { name: "bot1" }, action) => {
     switch (action.type) {
         case 'selectMember':
             return action.profile;
+        case 'createProfile':
+            return {
+                firstName: "",
+                lastName: "",
+                email: "",
+                tel: "",
+                team: "",
+                position: "",
+                leader: "",
+                des: ""
+            };
         default:
-            return { name: "bot2" }
+            return {
+                firstName: "",
+                lastName: "",
+                email: "",
+                tel: "",
+                team: "",
+                position: "",
+                leader: "",
+                des: ""
+            };
     }
 }
 

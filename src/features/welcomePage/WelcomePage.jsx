@@ -11,7 +11,7 @@ export default function WelcomePage() {
   return (
     <Paper
       style={{
-        backgroundImage: " linear-gradient(to right, #fa709a 0%, #fee140 100%)",
+        backgroundImage: "linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)",
       }}
     >
       {" "}

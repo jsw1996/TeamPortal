@@ -17,33 +17,36 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <PrivateRouteWelcome
-          exact
-          path="/"
-          component={WelcomePage}
-        ></PrivateRouteWelcome>
-        <Route
-          path={"/(.+)"}
-          render={() => (
-            <>
-              <TopNav />
-              <Provider store={store}>
+        <Provider store={store}>
+
+          <PrivateRouteWelcome
+            exact
+            path="/"
+            component={WelcomePage}
+          ></PrivateRouteWelcome>
+          <Route
+            path={"/(.+)"}
+            render={() => (
+              <>
+                <TopNav />
                 <PrivateRouteMembers exact
                   path="/members"
                   component={CardsGroup}
                 ></PrivateRouteMembers>
                 <PrivateRouteMembers
                   path="/createprofile"
-                  component={CreateProfile}
-                ></PrivateRouteMembers>
+                >
+                  <CreateProfile changable={true} newProfile={true} />
+                </PrivateRouteMembers>
                 <Route
                   path="/members/:id"
                 >
-                  <CreateProfile changable={true} />
-                </Route></Provider>
-            </>
-          )}
-        ></Route>
+                  <CreateProfile changable={false} newProfile={false} />
+                </Route>
+              </>
+            )}
+          ></Route>
+        </Provider>
       </AuthProvider>
     </Router>
   );

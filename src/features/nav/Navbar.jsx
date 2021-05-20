@@ -11,10 +11,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button'
 import {
 
-    Link
+    Link, NavLink
 } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import './nav.css'
+
 
 const useStyles = makeStyles((theme) => ({
+
+
     '@global': {
         ul: {
             margin: 0,
@@ -44,6 +49,8 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 const TopNav = () => {
+    const dispatch = useDispatch();
+
     const classes = useStyles();
     const [error, setError] = useState("")
     const { currentUser, logout } = useAuth()
@@ -62,17 +69,21 @@ const TopNav = () => {
         }
     }
     return (
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Navbar.Brand href="#home">Team Portal</Navbar.Brand>
+        <Navbar id="myNav" collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar.Brand id="title" href="#home">Team Portal</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link as={Link} to='/members'>Mmebers</Nav.Link>
-                    <Nav.Link as={Link} to="/createprofile">Crate Profile</Nav.Link>
+                    {/* <Nav.Link className="navLink" as={Link} to='/members'>Mmebers</Nav.Link> */}
+                    <NavLink className="navLink" as={Link} to='/members'>Mmebers</NavLink>
+
+                    {/* <Nav.Link className="navLink" as={Link} to="/createprofile" onClick={() => { dispatch({ type: "createProfile" }) }}>Crate Profile</Nav.Link> */}
+                    <NavLink className="navLink" to="/createprofile" onClick={() => { dispatch({ type: "createProfile" }) }}>Crate Profile</NavLink>
+
                 </Nav>
                 <Nav>
                     {/* <Nav.Link eventKey={2} href="#memes"> */}
-                    <Button variant="outline-primary" onClick={handleLogout}>Log Out</Button>{' '}
+                    <Button id="logOutButton" className="navLink" variant="outline-warning" onClick={handleLogout}>Log Out</Button>{' '}
 
                     {/* </Nav.Link> */}
                 </Nav>
