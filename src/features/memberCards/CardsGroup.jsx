@@ -9,15 +9,26 @@ import TopNav from "../nav/Navbar";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Filter from '../filter/Filter'
+import store from "../../redux/store";
+import context from "react-bootstrap/esm/AccordionContext";
 
-export const CardsGroup = () => {
+const CardsGroup = () => {
   const { currentUser, signup } = useAuth();
   const dispatch = useDispatch();
-
-  console.log(currentUser);
-
+  const memberfilter = useSelector(store => store.memberfilter);
   let [members, setMembers] = useState([]);
+
+  let matchFilter = (filter, item) => {
+    if (!filter || Object.keys(filter).length === 0) return true;
+
+    let keylist = Object.keys(filter);
+    // console.log(keylist)
+    let subset = (({ team, name }) => { return { team, name } })(item);
+    // console.log(subset);
+    return JSON.stringify(filter) === JSON.stringify(subset);
+  }
 
   useEffect(() => {
     readData("users").then((res) => {
@@ -25,7 +36,7 @@ export const CardsGroup = () => {
       let arr = [];
       res.forEach((item) => { arr.push(Object.assign({}, item.data(), { id: item.id })); });
       //Object.assign(item.data(), item.id))
-      console.log(arr);
+      // console.log(arr);
       setMembers(arr);
     });
   }, []);
@@ -43,10 +54,9 @@ export const CardsGroup = () => {
         }}
       >
         {" "}
-        <p>welcome {currentUser.displayName}</p>
         <Grid id="cardsGroup">
-          {members.map((item, index) => (
-            <Grid.Column key={index} mobile={8} tablet={4} computer={4}>
+          {members.filter(item => matchFilter(memberfilter, item)).map((item, index) => (
+            <Grid.Column key={item.id} mobile={8} tablet={4} computer={4}>
               <CardItem
                 onClick={() => { dispatch({ type: 'selectMember', profile: item }) }}
                 image="https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg"
@@ -59,7 +69,10 @@ export const CardsGroup = () => {
             </Grid.Column>
           ))}
         </Grid>
+        {/* <Filter></Filter> */}
       </Container>
     </Paper>
   );
 };
+
+export default CardsGroup;

@@ -11,6 +11,7 @@ import { CardsGroup } from "./features/memberCards/CardsGroup";
 import Container from "@material-ui/core/Container";
 import { Provider } from 'react-redux'
 import store from './redux/store'
+import Members from './features/memberCards/Members'
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 function App() {
@@ -31,7 +32,7 @@ function App() {
                 <TopNav />
                 <PrivateRouteMembers exact
                   path="/members"
-                  component={CardsGroup}
+                  component={Members}
                 ></PrivateRouteMembers>
                 <PrivateRouteMembers
                   path="/createprofile"
