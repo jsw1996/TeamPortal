@@ -1,4 +1,4 @@
-  
+
 import React from "react"
 import { Route, Redirect } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext"
@@ -10,7 +10,10 @@ export default function PrivateRouteWelcome({ component: Component, ...rest }) {
     <Route
       {...rest}
       render={props => {
-        return currentUser ? <Redirect to="/members" />:<Component {...props} /> 
+        return currentUser ? <Redirect to="/members" /> : <Component {...props} />
+        // if (!currentUser) {
+        //   return <Component {...props} />
+        // }
       }}
     ></Route>
   )

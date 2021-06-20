@@ -15,6 +15,10 @@ import Members from './features/memberCards/Members'
 import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
+  let createNew = <CreateProfile changable={true} newProfile={true} />
+
+
+
   return (
     <Router>
       <AuthProvider>
@@ -34,17 +38,15 @@ function App() {
                   <PrivateRouteMembers exact
                     path="/members"
                     component={Members}
-                  ></PrivateRouteMembers>
+                  />
                   <PrivateRouteMembers
                     path="/createprofile"
-                  >
-                    <CreateProfile changable={true} newProfile={true} />
-                  </PrivateRouteMembers>
-                  <Route
+                    component={() => <CreateProfile changable={true} newProfile={true} />}
+                  />
+                  <PrivateRouteMembers
                     path="/members/:id"
-                  >
-                    <CreateProfile changable={false} newProfile={false} />
-                  </Route>
+                    component={() => <CreateProfile changable={false} newProfile={false} />}
+                  />
                 </Switch>
               </>
             )}
