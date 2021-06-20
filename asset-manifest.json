@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/TeamPortal/static/css/main.b22ea3fe.chunk.css",
-    "main.js": "/TeamPortal/static/js/main.92882514.chunk.js",
-    "main.js.map": "/TeamPortal/static/js/main.92882514.chunk.js.map",
+    "main.js": "/TeamPortal/static/js/main.d4ef592a.chunk.js",
+    "main.js.map": "/TeamPortal/static/js/main.d4ef592a.chunk.js.map",
     "runtime-main.js": "/TeamPortal/static/js/runtime-main.1d066989.js",
     "runtime-main.js.map": "/TeamPortal/static/js/runtime-main.1d066989.js.map",
     "static/css/2.21c2cd22.chunk.css": "/TeamPortal/static/css/2.21c2cd22.chunk.css",
@@ -22,6 +22,6 @@
     "static/css/2.21c2cd22.chunk.css",
     "static/js/2.d2d5d6bf.chunk.js",
     "static/css/main.b22ea3fe.chunk.css",
-    "static/js/main.92882514.chunk.js"
+    "static/js/main.d4ef592a.chunk.js"
   ]
 }
