@@ -1,5 +1,6 @@
 {
   "name": "team-portal",
+  "homepage": "https://jsw1996.github.io/TeamPortal",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

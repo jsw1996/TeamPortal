@@ -30,20 +30,22 @@ function App() {
             render={() => (
               <>
                 <TopNav />
-                <PrivateRouteMembers exact
-                  path="/members"
-                  component={Members}
-                ></PrivateRouteMembers>
-                <PrivateRouteMembers
-                  path="/createprofile"
-                >
-                  <CreateProfile changable={true} newProfile={true} />
-                </PrivateRouteMembers>
-                <Route
-                  path="/members/:id"
-                >
-                  <CreateProfile changable={false} newProfile={false} />
-                </Route>
+                <Switch>
+                  <PrivateRouteMembers exact
+                    path="/members"
+                    component={Members}
+                  ></PrivateRouteMembers>
+                  <PrivateRouteMembers
+                    path="/createprofile"
+                  >
+                    <CreateProfile changable={true} newProfile={true} />
+                  </PrivateRouteMembers>
+                  <Route
+                    path="/members/:id"
+                  >
+                    <CreateProfile changable={false} newProfile={false} />
+                  </Route>
+                </Switch>
               </>
             )}
           ></Route>
