@@ -120,7 +120,7 @@ export default function SignInScreen() {
         </Alert>
       </Snackbar>
 
-      <form className={classes.form} onSubmit={handleSubmit} noValidate>
+      <form className={classes.form} noValidate>
         <TextField
           variant="outlined"
           margin="normal"
