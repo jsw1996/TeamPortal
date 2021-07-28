@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
 import CardItem from "./CardItem";
-import { Card } from "semantic-ui-react";
 import { readData } from "../../firebase/firestoreAPI";
 import "./card.css";
 import { Grid } from "semantic-ui-react";
 import { useAuth } from "../../contexts/AuthContext";
-import TopNav from "../nav/Navbar";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import Filter from '../filter/Filter'
-import store from "../../redux/store";
-import context from "react-bootstrap/esm/AccordionContext";
+
 
 const CardsGroup = () => {
   const { currentUser, signup } = useAuth();
@@ -21,13 +17,21 @@ const CardsGroup = () => {
   let [members, setMembers] = useState([]);
 
   let matchFilter = (filter, item) => {
-    if (!filter || Object.keys(filter).length === 0) return true;
+    // if (!filter || Object.keys(filter).length === 0) return true;
+    if (!filter) {
+      return true;
+    }
+    let matchTeam = !filter.team || filter.team === '' || filter.team === item.team
+    let matchPosition = !filter.position || filter.position === '' || filter.position === item.position
+    // let matchName = item.name !== undefined && (!filter.name || filter.name === '' || item.name.search(filter.name) != -1)
+    let matchName = item.name !== undefined && (!filter.name || filter.name === '' || item.name.indexOf(filter.name) != -1)
 
-    let keylist = Object.keys(filter);
-    // console.log(keylist)
-    let subset = (({ team, name }) => { return { team, name } })(item);
-    // console.log(subset);
-    return JSON.stringify(filter) === JSON.stringify(subset);
+    // let keylist = Object.keys(filter);
+    // // console.log(keylist)
+    // let subset = (({ team, name }) => { return { team, name } })(item);
+    // // console.log(subset);
+    // return JSON.stringify(filter) === JSON.stringify(subset);
+    return matchTeam && matchPosition && matchName;
   }
 
   useEffect(() => {
@@ -38,6 +42,7 @@ const CardsGroup = () => {
       //Object.assign(item.data(), item.id))
       // console.log(arr);
       setMembers(arr);
+      console.log("list:", arr)
     });
   }, []);
 
@@ -60,9 +65,9 @@ const CardsGroup = () => {
               <CardItem
                 onClick={() => { dispatch({ type: 'selectMember', profile: item }) }}
                 image="https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg"
-                header={item.firstName + " " + item.lastName}
-                meta={item.id}
-                des={item.des}
+                header={item.name}
+                meta={item.team}
+                des={item.position}
                 as={Link}
                 toPath={`/members/${item.id}`}
               ></CardItem>{" "}

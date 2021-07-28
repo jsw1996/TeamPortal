@@ -16,6 +16,10 @@ import {
 import { useDispatch } from 'react-redux';
 import './nav.css'
 
+// import { auth } from "../../firebase/firebase";
+
+// const user = auth.currentUser;
+
 
 const useStyles = makeStyles((theme) => ({
 
@@ -56,6 +60,8 @@ const TopNav = () => {
     const { currentUser, logout } = useAuth()
     const history = useHistory()
 
+    console.log('user:', currentUser)
+
     async function handleLogout(e) {
         setError("")
         // e.preventDefault();
@@ -78,11 +84,13 @@ const TopNav = () => {
                     <NavLink className="navLink" as={Link} to='/members'>Mmebers</NavLink>
 
                     {/* <Nav.Link className="navLink" as={Link} to="/createprofile" onClick={() => { dispatch({ type: "createProfile" }) }}>Crate Profile</Nav.Link> */}
-                    <NavLink className="navLink" to="/createprofile" onClick={() => { dispatch({ type: "createProfile" }) }}>Crate Profile</NavLink>
+                    {/* <NavLink className="navLink" to="/buildprofile" onClick={() => { dispatch({ type: "createProfile" }) }}>Build   Profile</NavLink> */}
 
                 </Nav>
                 <Nav>
                     {/* <Nav.Link eventKey={2} href="#memes"> */}
+                    <Button as={Link} to="/buildprofile" className="navLink" variant="outline-primary" onClick={() => { dispatch({ type: "createProfile" }) }}>Build Profile</Button>
+                    {/* <NavLink to={`/myProfile/${currentUser.uid}`}>Edit Profile</NavLink> */}
                     <Button id="logOutButton" className="navLink" variant="outline-warning" onClick={handleLogout}>Log Out</Button>{' '}
 
                     {/* </Nav.Link> */}

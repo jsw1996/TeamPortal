@@ -1,22 +1,31 @@
 import React, { useState } from "react";
-import { Form } from "semantic-ui-react";
-import { Button, Grid, Segment } from "semantic-ui-react";
+import { Form, Button, Grid, Segment, Dropdown, Input, Icon } from "semantic-ui-react";
 import "./CreateProfile.css";
-import { addMember } from '../../firebase/firestoreAPI'
+import { setMember, addMember, putData, readUser } from '../../firebase/firestoreAPI'
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import { Icon } from 'semantic-ui-react'
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { readData } from '../../firebase/firestoreAPI'
+import { useAuth } from "../../contexts/AuthContext"
 
-export const CreateProfile = ({ changable, newProfile }) => {
+export const CreateProfile = ({ changable, newProfile, history }) => {
   let [profileImage, setProfileImage] = useState("https://www.clipartmax.com/png/full/257-2572603_user-man-social-avatar-profile-icon-man-avatar-in-circle.png")
   let [readOnly, setReadOnly] = useState(!changable);
-  let { id } = useParams();
+  const { id } = useParams();
+  const { currentUser, logout } = useAuth()
+
   const initialProfile = useSelector(state => state);
-  let [profile, setProfile] = useState(initialProfile)
-  console.log("profile:" + profile);
+  const [profile, setProfile] = useState(initialProfile)
+
+  const teamOptions = [
+    { key: 'team1', text: 'Team1', value: 'Team1' },
+    { key: 'team2', text: 'Team2', value: 'Team2' },
+    { key: 'team3', text: 'Team3', value: 'Team3' },
+    { key: 'team4', text: 'Team4', value: 'Team4' },
+  ]
 
 
 
@@ -24,20 +33,31 @@ export const CreateProfile = ({ changable, newProfile }) => {
     if (event.target.value !== "") {
       let inputImage = URL.createObjectURL(event.target.files[0])
       setProfileImage(inputImage);
-      Object.assign(profile, { profileImage: inputImage });
+      console.log('input path' + inputImage);
+
+      putData(event.target.files[0], event.target.files[0].name, (imageUrl) => {
+        Object.assign(profile, { profileImage: imageUrl });
+        console.log(imageUrl)
+      })
+      // Object.assign(profile, { profileImage: inputImage });
       console.log("image changed");
-      console.log(inputImage);
     }
   };
 
   let handleSubmit = (event) => {
-    addMember(profile);
+    // addMember(profile);
+    setMember(currentUser.uid, profile);
+    alert('Profile Saved!');
   }
 
 
 
   let handleChange = (event, { name, value }) => {
     setProfile(Object.assign({}, profile, { [name]: value }));
+  }
+
+  let handleTeamChange = (e, { value }) => {
+    setProfile(Object.assign({}, profile, { team: value }));
   }
 
   let handleEdit = (event) => {
@@ -49,6 +69,9 @@ export const CreateProfile = ({ changable, newProfile }) => {
     setProfile(initialProfile)
   }
 
+  useEffect(() => {
+    readUser(currentUser.uid).then((res) => { console.log(res); setProfile(res) })
+  }, [])
 
 
   return (
@@ -75,16 +98,17 @@ export const CreateProfile = ({ changable, newProfile }) => {
 
                 <Form.Group>
                   <Form.Input
-                    value={profile.firstName}
+                    required
+                    value={profile.name}
                     readOnly={readOnly}
-                    label="First Name"
-                    name="firstName"
-                    width={8}
-                    placeholder="First Name"
+                    label="Name"
+                    name="name"
+                    width={16}
+                    placeholder="Name"
                     onChange={handleChange}
 
                   />
-                  <Form.Input
+                  {/* <Form.Input
                     value={profile.lastName}
                     id="lastName"
                     readOnly={readOnly}
@@ -93,7 +117,7 @@ export const CreateProfile = ({ changable, newProfile }) => {
                     width={8}
                     placeholder="Last Name"
                     onChange={handleChange}
-                  />
+                  /> */}
                 </Form.Group>
                 <br />
                 <Form.Input value={profile.email} readOnly={readOnly} label="Email" name="email" placeholder="Email" type="email" onChange={handleChange} />
@@ -102,8 +126,13 @@ export const CreateProfile = ({ changable, newProfile }) => {
               </Segment>
               <Segment className="segment">
                 <h3>Team Role</h3>
-                <Form.Input value={profile.team} readOnly={readOnly} label="Team" placeholder="Team" name="team" onChange={handleChange}
-                />
+                {/* <Form.Input value={profile.team} readOnly={readOnly} label="Team" placeholder="Team" name="team" onChange={handleChange}
+                /> */}
+                {/* <label for='teamSelector'> Team</label> */}
+                {/* <Input label='Team'> */}
+                <Form.Dropdown label='Team' id='teamSelector' placeholder={profile.team} value={profile.team} readOnly={readOnly} fluid selection options={readOnly ? null : teamOptions} onChange={handleTeamChange} />
+                {/* </Input> */}
+
 
                 <Form.Input value={profile.position} readOnly={readOnly} label="Position" placeholder="Position" name="position" onChange={handleChange} />
                 <Form.Input value={profile.leader} readOnly={readOnly} label="Leader " placeholder="Leader" name="leader" onChange={handleChange}

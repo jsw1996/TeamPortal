@@ -10,6 +10,7 @@ import "firebase/auth"
 
 // Add the Firebase products that you want to use
 import "firebase/firestore";
+import "firebase/storage"
 
 
 const firebaseConfig = {
@@ -26,3 +27,5 @@ export default firebase;
 export const auth = app.auth()
 
 export var db = firebase.firestore();
+export var storage = firebase.storage();
+export var storageRef = firebase.storage().ref();

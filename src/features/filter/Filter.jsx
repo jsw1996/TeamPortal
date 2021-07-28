@@ -1,24 +1,54 @@
 import React, { Component, useEffect, useState } from 'react';
 import './filter.css'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Input, Dropdown, Button } from 'semantic-ui-react'
 
 const Filter = () => {
+
+    const teamOptions = [
+        { key: 'team1', text: 'Team1', value: 'Team1' },
+        { key: 'team2', text: 'Team2', value: 'Team2' },
+        { key: 'team3', text: 'Team3', value: 'Team3' },
+        { key: 'team4', text: 'Team4', value: 'Team4' },
+    ]
+
+    const positionOpotions = [
+        { key: 'Engineer', text: 'Engineer', value: 'Engineer' },
+        { key: 'Project Manager', text: 'Project Manager', value: 'Project Manager' },
+        { key: 'Recruiter', text: 'Recruiter', value: 'Recruiter' }
+    ]
+
     const dispatch = useDispatch();
     const sortBy = ['Name', 'Team', 'Position']
     const [filterContent, setfilterContent] = useState()
 
-    let handleChange = (e, { value, name }) => {
-        var tempFilter = Object.assign({}, filterContent)
+    // let handleChange = (e, { value, name }) => {
+    //     var tempFilter = Object.assign({}, filterContent)
+    //     if (value == '') {
+    //         console.log("input is empty")
+    //         delete tempFilter[name];
+    //         console.log("tempFilter is", tempFilter)
+    //         setfilterContent(tempFilter)
+    //     }
+    //     else setfilterContent(Object.assign({}, tempFilter, { [name]: value }))
+    //     // console.log(filterContent)
+    //     // dispatch({ type: 'applyFilter', content: filterContent })
+    // }
+
+    let handleTeamChange = (e, { value }) => {
+        setfilterContent(Object.assign({}, filterContent, { team: value }))
+    }
+
+    let handlePositionChange = (e, { value }) => {
+        setfilterContent(Object.assign({}, filterContent, { position: value }))
+    }
+
+    let handleNameChange = (e, { name, value }) => {
         if (value == '') {
-            console.log("input is empty")
-            delete tempFilter[name];
-            console.log("tempFilter is", tempFilter)
-            setfilterContent(tempFilter)
+            setfilterContent(Object.assign({}, filterContent, { name: null }))
+
         }
-        else setfilterContent(Object.assign({}, tempFilter, { [name]: value }))
-        // console.log(filterContent)
-        // dispatch({ type: 'applyFilter', content: filterContent })
+        setfilterContent(Object.assign({}, filterContent, { name: value }))
     }
 
     useEffect(() => {
@@ -33,10 +63,12 @@ const Filter = () => {
     return (
         <form id="filter">
             <h3>Filter</h3>
-            <Input className='cus_input' name='name' onChange={handleChange} placeholder="search name" />
-            <Input className='cus_input' name='team' onChange={handleChange} placeholder="search team" />
+            <Input className='cus_input' onChange={handleNameChange} name='name' placeholder="Search Name" />
+            <Dropdown placeholder='Select Team' fluid clearable selection options={teamOptions} onChange={handleTeamChange} />
+            <br></br>
+            <Dropdown placeholder='Select Position' fluid clearable selection options={positionOpotions} onChange={handlePositionChange} />
 
-            <Dropdown
+            {/* <Dropdown
                 id='selector'
                 text='sort by'
                 icon='filter'
@@ -51,8 +83,8 @@ const Filter = () => {
                             <Dropdown.Item>{item}</Dropdown.Item>)
                     }
                 </Dropdown.Menu>
-            </Dropdown>
-            <Button type="button" color='green' size='small' onClick={() => { dispatch({ type: 'applyFilter', content: filterContent }) }} >Apply Filter</Button>
+            </Dropdown> */}
+            {/* <Button type="button" color='green' size='small' onClick={() => { dispatch({ type: 'applyFilter', content: filterContent }) }} >Apply Filter</Button> */}
 
         </form >
     )

@@ -40,13 +40,14 @@ function App() {
                     component={Members}
                   />
                   <PrivateRouteMembers
-                    path="/createprofile"
+                    path="/buildprofile"
                     component={() => <CreateProfile changable={true} newProfile={true} />}
                   />
                   <PrivateRouteMembers
                     path="/members/:id"
                     component={() => <CreateProfile changable={false} newProfile={false} />}
                   />
+
                 </Switch>
               </>
             )}
