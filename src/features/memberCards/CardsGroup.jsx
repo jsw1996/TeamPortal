@@ -17,20 +17,14 @@ const CardsGroup = () => {
   let [members, setMembers] = useState([]);
 
   let matchFilter = (filter, item) => {
-    // if (!filter || Object.keys(filter).length === 0) return true;
     if (!filter) {
       return true;
     }
     let matchTeam = !filter.team || filter.team === '' || filter.team === item.team
     let matchPosition = !filter.position || filter.position === '' || filter.position === item.position
-    // let matchName = item.name !== undefined && (!filter.name || filter.name === '' || item.name.search(filter.name) != -1)
     let matchName = item.name !== undefined && (!filter.name || filter.name === '' || item.name.indexOf(filter.name) != -1)
 
-    // let keylist = Object.keys(filter);
-    // // console.log(keylist)
-    // let subset = (({ team, name }) => { return { team, name } })(item);
-    // // console.log(subset);
-    // return JSON.stringify(filter) === JSON.stringify(subset);
+
     return matchTeam && matchPosition && matchName;
   }
 
@@ -39,8 +33,7 @@ const CardsGroup = () => {
 
       let arr = [];
       res.forEach((item) => { arr.push(Object.assign({}, item.data(), { id: item.id })); });
-      //Object.assign(item.data(), item.id))
-      // console.log(arr);
+
       setMembers(arr);
       console.log("list:", arr)
     });
@@ -74,7 +67,6 @@ const CardsGroup = () => {
             </Grid.Column>
           ))}
         </Grid>
-        {/* <Filter></Filter> */}
       </Container>
     </Paper>
   );

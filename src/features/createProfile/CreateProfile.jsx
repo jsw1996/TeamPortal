@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import { readData } from '../../firebase/firestoreAPI'
 import { useAuth } from "../../contexts/AuthContext"
 
 export const CreateProfile = ({ changable, newProfile, history }) => {

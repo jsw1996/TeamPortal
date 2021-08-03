@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import CardsGroup from './CardsGroup'
 import Filter from '../filter/Filter'
 

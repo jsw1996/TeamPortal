@@ -10,15 +10,12 @@ import Nav from 'react-bootstrap/Nav'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button'
 import {
-
     Link, NavLink
 } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import './nav.css'
 
-// import { auth } from "../../firebase/firebase";
 
-// const user = auth.currentUser;
 
 
 const useStyles = makeStyles((theme) => ({
@@ -64,11 +61,8 @@ const TopNav = () => {
 
     async function handleLogout(e) {
         setError("")
-        // e.preventDefault();
-
         try {
             await logout()
-            // history.push("/")
         } catch {
             console.log("Failed to log out")
             setError("Failed to log out")

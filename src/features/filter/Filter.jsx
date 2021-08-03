@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './filter.css'
 import { useDispatch } from 'react-redux';
 import { Input, Dropdown, Button } from 'semantic-ui-react'
