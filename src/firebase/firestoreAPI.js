@@ -99,3 +99,12 @@ export function putData(file, dest, callback) {
     );
 
 }
+
+export function removeData(collection, id) {
+    return db.collection(collection).doc(id).delete().then(() => {
+        console.log("Document successfully deleted!");
+    }).catch((error) => {
+        console.error("Error removing document: ", error);
+    });
+
+}

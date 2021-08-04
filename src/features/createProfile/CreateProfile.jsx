@@ -71,7 +71,8 @@ export const CreateProfile = ({ changable, newProfile, history }) => {
   }
 
   useEffect(() => {
-    readUser(currentUser.uid).then((res) => { console.log(res); setProfile(res) })
+    if (changable) { readUser(currentUser.uid).then((res) => { console.log(res); setProfile(res) }) }
+
   }, [])
 
 
@@ -90,7 +91,7 @@ export const CreateProfile = ({ changable, newProfile, history }) => {
               <div id="overlay"><Icon size="large" name='upload' /></div>
             </label>
           </div>
-          <h2 style={{ textAlign: "center", marginBottom: "30px" }}>{profile.firstName + " " + profile.lastName}</h2>
+          <h2 style={{ textAlign: "center", marginBottom: "30px" }}>{profile.name}</h2>
           <Grid stackable columns={2}>
             <Grid.Column width={6}>
               <Segment className="segment">

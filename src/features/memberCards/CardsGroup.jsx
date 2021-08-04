@@ -8,6 +8,7 @@ import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
+import Loader from "../../util/loader";
 
 
 const CardsGroup = () => {
@@ -15,7 +16,7 @@ const CardsGroup = () => {
   const dispatch = useDispatch();
   const memberfilter = useSelector(store => store.memberfilter);
   let [members, setMembers] = useState([]);
-
+  let [loading, setLoading] = useState(true)
   let matchFilter = (filter, item) => {
     if (!filter) {
       return true;
@@ -34,17 +35,19 @@ const CardsGroup = () => {
       let arr = [];
       console.log(res)
       res.forEach((item) => { arr.push(Object.assign({}, item.data(), { id: item.id })); });
-
+      setLoading(false);
       setMembers(arr);
       console.log("list:", arr)
     });
   }, []);
 
   return (
-    <Paper
+
+    !loading ? <Paper
       style={{
-        backgroundImage: "linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%)",
-      }}
+        backgroundImage: "transparent",
+      }
+      }
     >
       <Container
         maxWidth="lg"
@@ -69,7 +72,9 @@ const CardsGroup = () => {
           ))}
         </Grid>
       </Container>
-    </Paper>
+    </Paper > : <Loader></Loader>
+
+
   );
 };
 

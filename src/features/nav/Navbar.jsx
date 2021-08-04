@@ -70,7 +70,7 @@ const TopNav = () => {
     }
     return (
         <Navbar id="myNav" collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Navbar.Brand id="title" href="#home">Team Portal</Navbar.Brand>
+            <Navbar.Brand id="title">Team Portal</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto" style={{ marginLeft: '20px' }}>
