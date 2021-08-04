@@ -1,14 +1,16 @@
 # Summery
 
 The inspiration of this project is to facilitate team management for people work remotely during the pandemic. \
-这个项目最初的灵感是为了方便远程办公时的团队管理。
+这个项目最初的灵感是为了方便远程办公时的团队管理。\
+It enables users to manage team members and tasks in realtime.\
+用户可以通过它实时的管理组员和任务。
 
 ## Demo
 A demo of this app is available at https://jsw1996.github.io/TeamPortal/. \
 You can simply log in with your Google or Github account and try it out. 
 
-## Screenshots
-![recording1](https://user-images.githubusercontent.com/45106387/128216375-98db22b7-8397-440c-9b52-5eea32bbe724.gif)
+## Screenshot
+![recording2](https://user-images.githubusercontent.com/45106387/128217249-c4911f26-02b6-44c0-a083-a7ff7d43c066.gif)
 
 ## Major Modules
 -Team Member Page \
