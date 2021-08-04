@@ -17,6 +17,17 @@ export async function setMember(id, info) {
     return res;
 }
 
+
+export function addTask(type, task) {
+    return db.collection(type).add(task)
+        .then((docRef) => {
+            console.log("Document written with ID: ", docRef.id);
+        })
+        .catch((error) => {
+            console.error("Error adding document: ", error);
+        });
+}
+
 export function readUser(id) {
     var docRef = db.collection("users").doc(id);
 
@@ -38,7 +49,7 @@ export function readUser(id) {
 
 
 export async function readData(collectionName) {
-    const snapshot = await db.collection('users').get();
+    const snapshot = await db.collection(collectionName).get();
     return snapshot;
 }
 

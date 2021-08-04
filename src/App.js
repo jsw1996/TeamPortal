@@ -13,6 +13,7 @@ import { Provider } from 'react-redux'
 import store from './redux/store'
 import Members from './features/memberCards/Members'
 import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
+import KanbanPage from "./features/kanban/KanbanPage";
 
 function App() {
   let createNew = <CreateProfile changable={true} newProfile={true} />
@@ -38,6 +39,10 @@ function App() {
                   <PrivateRouteMembers exact
                     path="/members"
                     component={Members}
+                  />
+                  <PrivateRouteMembers exact
+                    path="/tasks"
+                    component={KanbanPage}
                   />
                   <PrivateRouteMembers
                     path="/buildprofile"

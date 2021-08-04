@@ -73,9 +73,11 @@ const TopNav = () => {
             <Navbar.Brand id="title" href="#home">Team Portal</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className="mr-auto">
+                <Nav className="mr-auto" style={{ marginLeft: '20px' }}>
                     {/* <Nav.Link className="navLink" as={Link} to='/members'>Mmebers</Nav.Link> */}
                     <NavLink className="navLink" as={Link} to='/members'>Mmebers</NavLink>
+                    <NavLink className="navLink" as={Link} to='/tasks'>Tasks</NavLink>
+
 
                     {/* <Nav.Link className="navLink" as={Link} to="/createprofile" onClick={() => { dispatch({ type: "createProfile" }) }}>Crate Profile</Nav.Link> */}
                     {/* <NavLink className="navLink" to="/buildprofile" onClick={() => { dispatch({ type: "createProfile" }) }}>Build   Profile</NavLink> */}
@@ -83,10 +85,10 @@ const TopNav = () => {
                 </Nav>
                 <Nav>
                     {/* <Nav.Link eventKey={2} href="#memes"> */}
-                    <Button as={Link} to="/buildprofile" className="navLink" variant="outline-primary" onClick={() => { dispatch({ type: "createProfile" }) }}>Build Profile</Button>
+                    <Button as={Link} to="/buildprofile" className="buttonLink" variant="outline-info" onClick={() => { dispatch({ type: "createProfile" }) }}>Build Profile</Button>
                     {/* <NavLink to={`/myProfile/${currentUser.uid}`}>Edit Profile</NavLink> */}
-                    <Button id="logOutButton" className="navLink" variant="outline-warning" onClick={handleLogout}>Log Out</Button>{' '}
-
+                    <Button id="logOutButton" className="buttonLink" variant="outline-warning" onClick={handleLogout}>Log Out</Button>{' '}
+                    <img style={{ width: "30px", marginLeft: "20px" }} src={currentUser.providerData[0].photoURL} />
                     {/* </Nav.Link> */}
                 </Nav>
             </Navbar.Collapse>

@@ -32,6 +32,7 @@ const CardsGroup = () => {
     readData("users").then((res) => {
 
       let arr = [];
+      console.log(res)
       res.forEach((item) => { arr.push(Object.assign({}, item.data(), { id: item.id })); });
 
       setMembers(arr);

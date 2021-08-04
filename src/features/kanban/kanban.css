@@ -1,0 +1,32 @@
+
+#kanbanPage h4{
+    font-weight: 900;
+    float: left;
+}
+
+#kanbanPage{
+    padding-top: 40px;
+    display: flex;
+    flex-direction:row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    /* background-color:rgb(239, 245, 250); */
+
+}
+
+#addButton{
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    background-color: transparent;
+    font-size: large ;
+    vertical-align: baseline;
+}
+
+#kanbanColumn{
+    width: 22%;
+}
+
+#columnHeader{
+    overflow: hidden;
+}

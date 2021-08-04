@@ -19,6 +19,8 @@ export const CreateProfile = ({ changable, newProfile, history }) => {
   const initialProfile = useSelector(state => state);
   const [profile, setProfile] = useState(initialProfile)
 
+  console.log(currentUser)
+
   const teamOptions = [
     { key: 'team1', text: 'Team1', value: 'Team1' },
     { key: 'team2', text: 'Team2', value: 'Team2' },
