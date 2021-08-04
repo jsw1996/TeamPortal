@@ -3,7 +3,9 @@
 The inspiration of this project is to facilitate team management for people work remotely during the pandemic. \
 这个项目最初的灵感是为了方便远程办公时的团队管理。\
 It enables users to manage team members and tasks in realtime.\
-用户可以通过它实时的管理组员和任务。
+用户可以通过它实时的管理组员和任务。\
+This app uses Firestore as its backend database to store and updates the members and tasks. \
+这个应用利用Firestore作为后端数据库来储存和更新用户及任务信息。
 
 ## Demo
 A demo of this app is available at https://jsw1996.github.io/TeamPortal/. \
