@@ -108,3 +108,10 @@ export function removeData(collection, id) {
     });
 
 }
+
+export function updateTaskStatus(id,newStat){
+    var task = db.collection("tasks").doc(id);
+    return task.update({
+        taskType: newStat
+    })
+}

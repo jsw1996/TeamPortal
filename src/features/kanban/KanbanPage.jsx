@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import KanbanColumn from './KanbanColumn';
-import { readData } from '../../firebase/firestoreAPI';
+import { readData,updateTaskStatus } from '../../firebase/firestoreAPI';
 import './kanban.css'
 const KanbanPage = () => {
     // const [toDo, setToDo] = useState([]);
@@ -16,12 +16,14 @@ const KanbanPage = () => {
     const [tasks, setTasks] = useState([])
 
 
-    let statusChange = (id) => {
+     async function statusChange(id){
         let ind = tasks.map((item) => { return item.id }).indexOf(id);
         let temp = [...tasks];
         if (temp[ind].taskType === 'To Do') {
+            await updateTaskStatus(id,'Doing');
             temp[ind].taskType = 'Doing';
         } else if (temp[ind].taskType === 'Doing') {
+            await updateTaskStatus(id,'Done');
             temp[ind].taskType = 'Done';
         }
         setTasks(temp);
